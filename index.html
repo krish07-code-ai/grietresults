@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GRIET Results</title>
+
+<style>
+body {
+  font-family: "Times New Roman", serif;
+  background: white;
+  margin: 0;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 15px;
+}
+
+.header h2 {
+  color: red;
+  margin: 5px 0;
+}
+
+.red-bar {
+  height: 15px;
+  background: red;
+}
+
+/* INPUT BOX */
+.center-box {
+  text-align: center;
+  margin-top: 120px;
+}
+
+input {
+  padding: 5px;
+  font-size: 14px;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* RESULT PAGE */
+.container {
+  width: 85%;
+  margin: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.details {
+  margin-top: 20px;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 6px;
+  text-align: center;
+}
+
+/* FOOTER */
+.footer {
+  background: #2b2b2b;
+  color: #aaa;
+  text-align: center;
+  padding: 12px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h2>GOKARAJU RANGARAJU INSTITUTE OF ENGINEERING & TECHNOLOGY</h2>
+  <p><b>(AUTONOMOUS)</b><br>
+  BACHUPALLY, KUKATPALLY, HYDERABAD - 500090</p>
+</div>
+<div class="red-bar"></div>
+
+<!-- INPUT PAGE -->
+<div id="inputPage" class="center-box">
+  <label><b>Hall Ticket No:</b></label>
+  <input type="text" id="rollInput">
+  <br><br>
+  <button onclick="getResult()">Get Result</button>
+  <p id="error" style="color:red;"></p>
+</div>
+
+<!-- RESULT PAGE -->
+<div id="resultPage" class="container hidden">
+
+  <h3 style="text-align:center;">
+    B.Tech, I B.Tech II Sem (GR24), Computer Science and Engineering<br>
+    (Artificial Intelligence and Machine Learning), REGULAR,<br>
+    June 2025 Results
+  </h3>
+
+  <div class="details">
+    <p><b>Name :</b> <span id="name"></span></p>
+    <p><b>Roll No :</b> <span id="roll"></span></p>
+    <p><b>Branch :</b> <span id="branch"></span></p>
+  </div>
+
+  <p><b>Note:</b> This is a computer generated document for information purpose only.</p>
+
+  <table>
+    <tr>
+      <th>S.No</th>
+      <th>Subject Name</th>
+      <th>Grade Point</th>
+    </tr>
+    <tbody id="subjectsTable"></tbody>
+  </table>
+
+  <p style="text-align:right;">
+    <b>SGPA (Including all results for this semester):</b>
+    <span id="sgpa"></span>
+  </p>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  COPYRIGHT (C) 2026 GRIET. ALL RIGHTS RESERVED. MAINTAINED BY GRIET-ECE.
+</div>
+
+<script>
+const branchName =
+"Computer Science and Engineering (Artificial Intelligence and Machine Learning)";
+
+const results = {
+  "24241a66fd": {
+    name:"KARRA LAXMAN",
+    sgpa:"8.8",
+    subjects:{
+      "Discrete Maths":8,
+      "Java Programming":7,
+      "Engineering Economics":8,
+      "Software Engineering":9,
+      "Database Management System":8,
+      "DBMS Lab":10,
+      "Java Programming Lab":9,
+      "Scripting Language Lab":9,
+      "Environmental Science":10,
+      "Value Added Course":9
+    }
+  },
+
+  "24241a66f9": {
+    name:"GANGAVARAM PHANI SAKETH",
+    sgpa:"8.6",
+    subjects:{
+      "Discrete Maths":8,
+      "Java Programming":7,
+      "Engineering Economics":8,
+      "Software Engineering":8,
+      "Database Management System":8,
+      "DBMS Lab":9,
+      "Java Programming Lab":9,
+      "Scripting Language Lab":9,
+      "Environmental Science":9,
+      "Value Added Course":9
+    }
+  },
+
+  "24241a66es": {
+    name:"ALAMURU SAI SATHVIK",
+    sgpa:"9.2",
+    subjects:{
+      "Discrete Maths":8,
+      "Java Programming":9,
+      "Engineering Economics":8,
+      "Software Engineering":10,
+      "Database Management System":8,
+      "DBMS Lab":10,
+      "Java Programming Lab":10,
+      "Scripting Language Lab":9,
+      "Environmental Science":10,
+      "Value Added Course":9
+    }
+  },
+
+  "24241a66ga": {
+    name:"UDAY KIRAN REDDY",
+    sgpa:"8.4",
+    subjects:{
+      "Discrete Maths":8,
+      "Java Programming":8,
+      "Engineering Economics":8,
+      "Software Engineering":8,
+      "Database Management System":8,
+      "DBMS Lab":10,
+      "Java Programming Lab":9,
+      "Scripting Language Lab":8,
+      "Environmental Science":8,
+      "Value Added Course":8
+    }
+  },
+
+  "24241a66gb": {
+    name:"V BHANU PRAKASH ACHARY",
+    sgpa:"9.2",
+    subjects:{
+      "Discrete Maths":9,
+      "Java Programming":10,
+      "Engineering Economics":8,
+      "Software Engineering":9,
+      "Database Management System":10,
+      "DBMS Lab":10,
+      "Java Programming Lab":9,
+      "Scripting Language Lab":9,
+      "Environmental Science":10,
+      "Value Added Course":9
+    }
+  },
+
+  "24241a66ge": {
+    name:"VEERAMALLU SAI AKSHITH",
+    sgpa:"8.4",
+    subjects:{
+      "Discrete Maths":8,
+      "Java Programming":7,
+      "Engineering Economics":8,
+      "Software Engineering":9,
+      "Database Management System":8,
+      "DBMS Lab":8,
+      "Java Programming Lab":8,
+      "Scripting Language Lab":8,
+      "Environmental Science":8,
+      "Value Added Course":8
+    }
+  }
+};
+
+function getResult() {
+  const rollInput = document.getElementById("rollInput").value.toLowerCase();
+  const error = document.getElementById("error");
+
+  if (!results[rollInput]) {
+    error.innerText = "Result not found";
+    return;
+  }
+
+  document.getElementById("inputPage").style.display = "none";
+  document.getElementById("resultPage").classList.remove("hidden");
+
+  document.getElementById("name").innerText = results[rollInput].name;
+  document.getElementById("roll").innerText = rollInput.toUpperCase();
+  document.getElementById("branch").innerText = branchName;
+  document.getElementById("sgpa").innerText = results[rollInput].sgpa;
+
+  const table = document.getElementById("subjectsTable");
+  table.innerHTML = "";
+
+  let i = 1;
+  for (let subject in results[rollInput].subjects) {
+    table.innerHTML += `
+      <tr>
+        <td>${i++}</td>
+        <td style="text-align:left">${subject}</td>
+        <td>${results[rollInput].subjects[subject]}</td>
+      </tr>`;
+  }
+}
+</script>
+
+</body>
+</html>
